@@ -13,7 +13,6 @@ function showMap(data){
 
 function geolocationSucces (posData){
     location_data.innerHTML="latitud = " + posData.coords.latitude + "<br>longitud = " + posData.coords.longitude ;
-    alert("OK");
     showMap(posData);
     console.log(posData);
 };
