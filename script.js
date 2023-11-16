@@ -1,20 +1,24 @@
-var button = document.getElementById("titulo");
-var texto = document.getElementById("coord");
+var button = document.getElementById("getLocBut");
+var texto1 = document.getElementById("coord");
+var texto2 = document.getElementById("hist");
+var historial ="";
 
-function accion(){
-    alert("START");
-    for(var i=0;i<10;i++){
-        console.log(i)
-        navigator.geolocation.getCurrentPosition(coordenadas);
-    }
-    alert("STOP");
+function ubicar(){
+    navigator.geolocation.getCurrentPosition(coordenadas);
 }
+
 function coordenadas(pos){
-    texto.innerHTML="<h2>Latitude: " + pos.coords.latitude +
-    "<br>Longitude: " + pos.coords.longitude + "</h2>";
-    
+    var newText ="<h2>Latitude: " + pos.coords.latitude +"/"+
+    "Longitude: " + pos.coords.longitude + "</h2><br>";
+    texto1.innerHTML=newText;
+    funHistorial(newText);
+}
+
+function funHistorial(locText){
+    historial += locText;
+    console.log(historial)
+    texto2.innerHTML=historial;
 }
 
 
-
-button.ondblclick=accion;
+button.onclick=ubicar;
