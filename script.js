@@ -5,6 +5,7 @@ var historial ="";
 
 function ubicar(){
     navigator.geolocation.getCurrentPosition(coordenadas);
+    alert("CONSULTA REALIZADA")
 }
 
 function coordenadas(pos){
