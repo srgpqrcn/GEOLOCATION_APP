@@ -1,9 +1,26 @@
-#titulo{
-    background-color: red;
+body{
+    background-color: white;
+    
 }
-#getLocBut{
+#titulo{
     background-color: black;
     text-align: center;
     color: white;
-    
+}
+.buttonArea{
+    display: flex;   
+}
+.dataArea{
+    display: flex;
+}
+.but{
+    flex: 1 1;
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    color: white; 
+}
+#hist,#coord{
+    flex: 1 1;
+    color: black;
+
 }
