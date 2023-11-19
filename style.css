@@ -2,25 +2,32 @@ body{
     background-color: white;
     
 }
-#titulo{
+.titulo{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     background-color: black;
-    text-align: center;
     color: white;
+    text-align: center;
+
 }
 .wrap{
-    display: flex;   
-    flex-direction: column;
+    display: flex;
+    flex-direction: column;  
+
+}
+
+.buttonArea{
+    flex: 1;
+    display: flex;
+    flex-direction: row ;
+    
 }
 
 .but{
-    flex: 1 1;
-    background-color: rgb(0, 0, 0);
-    text-align: center;
-    color: white; 
+    flex: 1;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
-#data{
-    flex: 1 1;
-    color: black;
-    text-align: center;
+.data{
+    flex: 1;
+    font-family: Arial, Helvetica, sans-serif
 
 }

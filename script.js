@@ -1,9 +1,18 @@
-var button = document.getElementById("getLocBut");
-var text = document.getElementById("data");
+var buttonStart = document.getElementById("startBut");
+var buttonStop = document.getElementById("stopBut");
+var data = document.getElementById("dataArea");
 var bdHistorial =[];
+var eventId;
 
-function ubicar(){
-    navigator.geolocation.getCurrentPosition(coordenadas);
+
+
+function iniciarTrack(){
+    //navigator.geolocation.getCurrentPosition(coordenadas);
+    eventId = navigator.geolocation.watchPosition(coordenadas,errorUbic,{timeout:5000});
+}
+
+function stopTrack(){
+    navigator.geolocation.clearWatch(eventId);
 }
 
 function coordenadas(pos){
@@ -11,19 +20,26 @@ function coordenadas(pos){
 }
 
 function crearHist(pos){
-    bdHistorial.push(pos);
+    bdHistorial.push([pos.coords.latitude,pos.coords.longitude]);
     verHist();
 }
 
 function verHist(){
     var auxText = "";
-    var pto=0;
+    
     for (var i=0;i<bdHistorial.length;i++){
         pto=i+1;
-        auxText +="<h3>"+pto+" /// "+bdHistorial[i].coords.latitude + "," + bdHistorial[i].coords.longitude+"</h3>";
+        auxText +="<h3>"+bdHistorial[i]+"</h3>";
     }
-    text.innerHTML=auxText;
+    data.innerHTML=auxText;
+}
+
+function errorUbic(error){
+    console.log(error.message);
 }
 
 
-button.onclick=ubicar;
+buttonStart.onclick=iniciarTrack;
+buttonStop.onclick=stopTrack;
+
+//NOTA: Añadir scrapping de info relacionada con las coordenadas actuales, como app tipo radar de sitios de interes cercanos a mi posicion
