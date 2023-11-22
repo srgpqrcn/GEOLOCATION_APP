@@ -1,10 +1,11 @@
 body{
-    background-color: white;
+    background-color:black;
     
 }
 .titulo{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: black;
+    font-size: large;
+    background-color: #fa2b43;
     color: white;
     text-align: center;
 
@@ -14,20 +15,20 @@ body{
     flex-direction: column;  
 
 }
-
 .buttonArea{
     flex: 1;
     display: flex;
     flex-direction: row ;
-    
 }
-
 .but{
     flex: 1;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 .data{
     flex: 1;
-    font-family: Arial, Helvetica, sans-serif
-
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+#map{
+    height: 350px; 
 }
