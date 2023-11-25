@@ -1,11 +1,12 @@
+var mapArea = document.querySelector("#map");
 var buttonStart = document.getElementById("startBut");
 var buttonStop = document.getElementById("stopBut");
 var data = document.getElementById("dataArea");
 var bdHistorial =[];
 var eventId;
 
-let marker, circle, zoomed;
-var track;
+var marker, circle, zoomed;
+var track, startPoint, endPoint;
 
 const map = L.map('map'); 
 // Initializes map
@@ -19,16 +20,22 @@ attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap<
 }).addTo(map); 
 // Sets map data source and associates with map
 
-function iniciarTrack(){
-    eventId = navigator.geolocation.watchPosition(coordenadas,errorUbic,{maximumAge:5000,timeout:5000});
+
+function start(){
+    if (track) {
+        map.removeLayer(track);
+        map.removeLayer(marker);
+        map.removeLayer(startPoint,endPoint);
+        
+    }
+
+    eventId = navigator.geolocation.watchPosition(tracking,errorUbic,{maximumAge:5000,timeout:5000});
 }
 
-function stopTrack(){
+function stop(){
     navigator.geolocation.clearWatch(eventId);
-}
-
-function crearHist(pos){
-    bdHistorial.push([pos.coords.latitude,pos.coords.longitude]);
+    alert("tracking detenido");
+    mappingTrack(bdHistorial);
 }
 
 function errorUbic(error){
@@ -40,11 +47,8 @@ function errorUbic(error){
     }
 }
 
-function coordenadas(pos){
-    crearHist(pos);
-
-    var track = L.polyline(bdHistorial,{color:'red'}).addTo(map);
-    var startPos = L.circle([bdHistorial[0][0],bdHistorial[0][1]],{color:'red',radius:pos.coords.accuracy}).addTo(map);
+function tracking(pos){
+    bdHistorial.push([pos.coords.latitude,pos.coords.longitude]);
 
     const lat = pos.coords.latitude;
     const lng = pos.coords.longitude;
@@ -52,30 +56,41 @@ function coordenadas(pos){
 
     if (marker) {
         map.removeLayer(marker);
+        
         //map.removeLayer(circle);
-        }
-
-
-    // Removes any existing marker and circule (new ones about to be set)
+    }
         
-    marker = L.marker([lat,lng]).addTo(map);
+    marker = L.marker([pos.coords.latitude,pos.coords.longitude]).addTo(map);
         
-    //circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);
-     // Adds marker to the map and a circle for accuracy
-        
+    //circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);      
    
+    //if (!zoomed) {
+    //zoomed = map.fitBounds(track.getBounds());
+    //}
+
+    map.setView([pos.coords.latitude,pos.coords.longitude]);
+}
+
+function mappingTrack(data){
+    var n = bdHistorial.length-1;
+
+    if (track) {
+        map.removeLayer(track);
+        
+    }
+
+    startPoint = L.circle([data[0][0],data[0][1]],{color:'red',radius:200}).addTo(map);
+    endPoint = L.circle([data[n][0],data[n][1]],{color:'green',radius:200}).addTo(map);
+    track = L.polyline(data,{color:'black'}).addTo(map);
+
     if (!zoomed) {
     zoomed = map.fitBounds(track.getBounds());
     }
 
-    // Set zoom to boundaries of accuracy circle
-    map.setView([lat,lng]);
-    // Set map focus to current user position
+    //map.fitBounds(track.getBounds());
 
-    // zoom the map to the polyline
-    map.fitBounds(track.getBounds());
 }
 
 
-buttonStart.onclick=iniciarTrack;
-buttonStop.onclick=stopTrack;
+buttonStart.onclick=start;
+buttonStop.onclick=stop;
