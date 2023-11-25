@@ -2,11 +2,10 @@ var mapArea = document.querySelector("#map");
 var buttonStart = document.getElementById("startBut");
 var buttonStop = document.getElementById("stopBut");
 var data = document.getElementById("dataArea");
-var bdHistorial =[];
+var bdHistorial;
 var eventId;
 
-var marker, circle, zoomed;
-var track, startPoint, endPoint;
+var track, wayPoint,layer;
 
 const map = L.map('map'); 
 // Initializes map
@@ -22,19 +21,13 @@ attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap<
 
 
 function start(){
-    if (track) {
-        map.removeLayer(track);
-        map.removeLayer(marker);
-        map.removeLayer(startPoint,endPoint);
-        
-    }
-
+    bdHistorial =[];
+    clearMap(map);
     eventId = navigator.geolocation.watchPosition(tracking,errorUbic,{maximumAge:5000,timeout:5000});
 }
 
 function stop(){
     navigator.geolocation.clearWatch(eventId);
-    alert("tracking detenido");
     mappingTrack(bdHistorial);
 }
 
@@ -47,48 +40,29 @@ function errorUbic(error){
     }
 }
 
+function clearMap(mapToClear){
+    if (layer){
+        mapToClear.removeLayer(layer);
+    }
+}
+
 function tracking(pos){
     bdHistorial.push([pos.coords.latitude,pos.coords.longitude]);
 
-    const lat = pos.coords.latitude;
-    const lng = pos.coords.longitude;
-    const accuracy = pos.coords.accuracy;
-
-    if (marker) {
-        map.removeLayer(marker);
-        
-        //map.removeLayer(circle);
+    if(wayPoint){
+        map.removeLayer(wayPoint);
     }
         
-    marker = L.marker([pos.coords.latitude,pos.coords.longitude]).addTo(map);
-        
-    //circle = L.circle([lat, lng], { radius: accuracy }).addTo(map);      
-   
-    //if (!zoomed) {
-    //zoomed = map.fitBounds(track.getBounds());
-    //}
-
-    map.setView([pos.coords.latitude,pos.coords.longitude]);
+    wayPoint = L.marker([pos.coords.latitude,pos.coords.longitude]).addTo(map);
+    map.setView([pos.coords.latitude,pos.coords.longitude], pos.accuracy); 
+    
 }
 
 function mappingTrack(data){
-    var n = bdHistorial.length-1;
 
-    if (track) {
-        map.removeLayer(track);
-        
-    }
-
-    startPoint = L.circle([data[0][0],data[0][1]],{color:'red',radius:200}).addTo(map);
-    endPoint = L.circle([data[n][0],data[n][1]],{color:'green',radius:200}).addTo(map);
     track = L.polyline(data,{color:'black'}).addTo(map);
-
-    if (!zoomed) {
-    zoomed = map.fitBounds(track.getBounds());
-    }
-
-    //map.fitBounds(track.getBounds());
-
+    map.fitBounds(track.getBounds());
+    layer = L.layerGroup([track,wayPoint]); 
 }
 
 
