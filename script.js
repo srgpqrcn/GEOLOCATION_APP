@@ -7,18 +7,22 @@ var eventId;
 
 var track, wayPoint,layer;
 
-const map = L.map('map'); 
-// Initializes map
+var map; 
 
-map.setView([40.4167754,-3.7037902], 5); 
-// Sets initial coordinates and zoom level
-
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-maxZoom: 19,
-attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map); 
-// Sets map data source and associates with map
-
+function iniMap(){
+    map = L.map('map'); 
+    // Initializes map
+    
+    map.setView([40.4167754,-3.7037902], 5); 
+    // Sets initial coordinates and zoom level
+    
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map); 
+    // Sets map data source and associates with map
+    
+}
 
 function start(){
     bdHistorial =[];
@@ -65,6 +69,7 @@ function mappingTrack(data){
     layer = L.layerGroup([track,wayPoint]); 
 }
 
-
+//document.onload=iniMap;
+iniMap();
 buttonStart.onclick=start;
 buttonStop.onclick=stop;
