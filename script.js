@@ -30,10 +30,14 @@ function iniMap(){
 function start(){
     bdHistorial =[];
     clearMap(map);
+    buttonStop.style.backgroundColor="white";
+    buttonStart.style.backgroundColor="green";
     eventId = navigator.geolocation.watchPosition(tracking,errorUbic,{maximumAge:5000,timeout:5000});
 }
 
 function stop(){
+    buttonStart.style.backgroundColor="white";
+    buttonStop.style.backgroundColor="red";
     navigator.geolocation.clearWatch(eventId);
     mappingTrack(bdHistorial);
 }

@@ -1,50 +1,56 @@
-html,body{
-    height: 100%;
-    margin: 0;}
+* {
+    margin: 0;
+  }
 body{
     background-color:rgba(56, 54, 54, 0.992);
-    margin: 1vw;
 }
-.wrap{
+
+.wrapper{
     display: flex;
     flex-direction: column;
-    height: 100%;
-    gap:20px;
-
+    height: 100vh;
+    gap: 20px;
 }
-.titulo{
-    flex: 0 1 auto;
 
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 60px;
+.headerContainer {
+    flex: 0;
+}
+
+header {
     background-color: #fa2b43;
-    color: white;
+    margin: 10px 10px 0px 10px;
+    border-radius: 25px;
     text-align: center;
-    
-    
+    font-size: 25px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-.buttonContainer{
-    flex: 0 1 auto;
-    display: flex;
+.buttonContainer {
+    flex: 0;
+    display:flex;
     flex-direction: row;
-    gap: 50px;
+    justify-content: space-around;
+    gap: 20px;
+
 }
 .but{
-    flex: 1;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    flex:1;
+    width: 50px;
+    margin: 0px 10px 0px 10px;
+    text-align: center;
     font-size: 25px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     border-radius: 25px;
+    background-color: white;
+
 }
-.mapcontainer{
-    flex: 1 1 auto;
+.mapContainer {
+    flex: 1;
+    margin: 0px 10px 10px 10px; 
 }
-#map{
+#map {
     height: 100%;
-    min-height: 600px;
-    border-radius: 15px;
-    margin-bottom: 0 ;
-}
-footer{
-    flex: 0 1 40px;
+    border-radius: 10px;
+       
+    
 }
