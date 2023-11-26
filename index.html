@@ -8,22 +8,27 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css"
     integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
     crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
-    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
-    crossorigin=""></script>
 
 </head>
 <body>
-    <header class="titulo">TRACKER</header>
     <div class="wrap">
-        <div class="buttonArea">
+        <div class="titulo">
+            <header>TRACKER</header>
+        </div>
+        <div class="buttonContainer">
             <button id="startBut" class="but">START</button>
             <button id="stopBut" class="but">STOP</button>
         </div>
-        <div id="dataArea" class="data"></div>
-        <div id="map"></div>
+        <div class="mapContainer">
+            <div id="map"></div>
+        </div>
+        <footer></footer>
     </div>
+
     
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js"
+    integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg="
+    crossorigin=""></script>
     <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

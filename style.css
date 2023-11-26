@@ -1,24 +1,31 @@
+html,body{
+    height: 100%;
+    margin: 0;}
 body{
     background-color:rgba(56, 54, 54, 0.992);
-    
-}
-.titulo{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 100px;
-    background-color: #fa2b43;
-    color: white;
-    text-align: center;
-    margin-bottom: 20px;
+    margin: 1vw;
 }
 .wrap{
     display: flex;
     flex-direction: column;
-    column-span: 5px;  
-    gap: 10px;
+    height: 100%;
+    gap:20px;
 
 }
-.buttonArea{
-    flex: 1;
+.titulo{
+    flex: 0 1 auto;
+
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 60px;
+    background-color: #fa2b43;
+    color: white;
+    text-align: center;
+    
+    
+}
+
+.buttonContainer{
+    flex: 0 1 auto;
     display: flex;
     flex-direction: row;
     gap: 50px;
@@ -28,18 +35,16 @@ body{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 25px;
     border-radius: 25px;
-    
 }
-.data{
-    flex: 1;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
+.mapcontainer{
+    flex: 1 1 auto;
 }
 #map{
-    flex:1;
-    min-height: 400px;
+    height: 100%;
+    min-height: 600px;
     border-radius: 15px;
-    
-    
-    
+    margin-bottom: 0 ;
+}
+footer{
+    flex: 0 1 40px;
 }

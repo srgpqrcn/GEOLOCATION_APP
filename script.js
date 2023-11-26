@@ -1,13 +1,14 @@
-var mapArea = document.querySelector("#map");
+var mapArea = document.getElementById("map");
 var buttonStart = document.getElementById("startBut");
 var buttonStop = document.getElementById("stopBut");
-var data = document.getElementById("dataArea");
 var bdHistorial;
 var eventId;
 
 var track, wayPoint,layer;
 
 var map; 
+
+///FUNCTIONS
 
 function iniMap(){
     map = L.map('map'); 
@@ -21,6 +22,8 @@ function iniMap(){
     attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map); 
     // Sets map data source and associates with map
+
+    console.log(mapArea.offsetHeight + "/" + mapArea.offsetWidth);
     
 }
 
@@ -45,8 +48,10 @@ function errorUbic(error){
 }
 
 function clearMap(mapToClear){
-    if (layer){
+    if (track || wayPoint){
         mapToClear.removeLayer(layer);
+        //revisar por que no funcionaesto bien.
+        map.removeLayer(track,wayPoint);
     }
 }
 
@@ -58,18 +63,21 @@ function tracking(pos){
     }
         
     wayPoint = L.marker([pos.coords.latitude,pos.coords.longitude]).addTo(map);
-    map.setView([pos.coords.latitude,pos.coords.longitude], pos.accuracy); 
+    map.setView([pos.coords.latitude,pos.coords.longitude],16); 
     
 }
 
 function mappingTrack(data){
-
     track = L.polyline(data,{color:'black'}).addTo(map);
     map.fitBounds(track.getBounds());
     layer = L.layerGroup([track,wayPoint]); 
+
+    console.log("data");
 }
 
-//document.onload=iniMap;
+///MAIN
+
 iniMap();
+
 buttonStart.onclick=start;
 buttonStop.onclick=stop;
